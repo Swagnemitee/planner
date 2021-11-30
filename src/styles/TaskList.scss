@@ -1,0 +1,36 @@
+@import 'colors.scss';
+
+.TaskList {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0px;
+  background-color: $list_color;
+
+  padding: 0.5em;
+  margin-bottom: 1em;
+
+  border: 0.2em solid $accent_color;
+  border-radius: 0.8em;
+
+  > .TaskList-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    > img {
+      visibility: hidden;
+      height: 50%;
+    }
+
+    &:hover {
+      > img {
+        visibility: visible;
+      }
+    }
+  }
+
+  > .Task-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,700;1,400;1,700&display=swap');
+
+@import 'colors.scss';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  user-select:none;
+}
+
+body {
+  background-color: $background_color;
+  overflow: hidden;
+  color: black;
+}
+
+// html {
+//   height: 100%;
+// }
+
+// body {
+//   height: 100%;
+// }
+
+// #root {
+//   height: 100%;
+// }
+
