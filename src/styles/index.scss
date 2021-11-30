@@ -15,18 +15,10 @@
 body {
   background-color: $background_color;
   overflow: hidden;
-  color: black;
+  color: $accent_color;
 }
 
-// html {
-//   height: 100%;
-// }
-
-// body {
-//   height: 100%;
-// }
-
-// #root {
-//   height: 100%;
-// }
+.divider {
+  flex: auto;
+}
 

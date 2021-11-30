@@ -4,16 +4,31 @@ import Task from './Task';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 
 type props = {
-  user: UserType;
+  userState: UserType;
+  setUserState: React.Dispatch<React.SetStateAction<UserType>>;
+  saveData: () => void;
   list: TaskListType;
   listIndex: number;
 }
 
 export default function TaskList({
-  user,
-  list,
-  listIndex,
+  userState, setUserState, list, listIndex, saveData
 }: props) {
+  const newTask = () => {
+    // TODO: Create new task
+    setUserState(userState);
+    saveData();
+    console.log("New Task");
+  }
+
+  const more = () => {
+    // TODO: List more menu
+    setUserState(userState);
+    saveData();
+    console.log("More");
+  }
+
+
   return (
     <Draggable draggableId={list.id} index={listIndex}>
       {(provided) =>
@@ -25,6 +40,8 @@ export default function TaskList({
             {...provided.dragHandleProps}
           >
             <h3>{list.name}</h3>
+            <div className="divider"></div>
+            <img src="icons/add.png" alt="Add"/>
             <img src="icons/more.png" alt="More"/>
           </div>
           <Droppable droppableId={list.id} type="task">
@@ -38,8 +55,10 @@ export default function TaskList({
                   list.taskIDs.map((id, taskIndex) => 
                     <Task
                       key={id}
-                      user={user}
-                      task={user.tasks.get(id)!}
+                      userState={userState}
+                      setUserState={setUserState}
+                      saveData = {saveData}
+                      task={userState.tasks.get(id)!}
                       index={taskIndex}
                     />
                   )

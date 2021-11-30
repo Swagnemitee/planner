@@ -1,8 +1,22 @@
 import '../styles/Header.scss';
+import { UserType } from '../types/types';
 
-export default function Header() {
+type props = {
+  userState: UserType;
+  setUserState: React.Dispatch<React.SetStateAction<UserType>>;
+  saveData: () => void;
+}
 
-  // TODO: Add new group
+export default function Header({
+  userState, setUserState, saveData
+}: props) {
+
+  const newGroup = () => {
+    // TODO: Create new group
+    setUserState(userState);
+    saveData();
+    console.log("New Group");
+  }
 
   return (
     <header>

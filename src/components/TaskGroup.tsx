@@ -1,43 +1,73 @@
 import '../styles/TaskGroup.scss';
 import { TaskGroupType, UserType } from '../types/types';
-import { Droppable } from 'react-beautiful-dnd';
+import { Draggable, Droppable } from 'react-beautiful-dnd';
 import TaskList from './TaskList';
 
 type props = {
-  user: UserType;
+  userState: UserType;
+  setUserState: React.Dispatch<React.SetStateAction<UserType>>;
+  saveData: () => void;
   group: TaskGroupType;
+  groupIndex: number;
 }
 
 export default function TaskGroup({
-  user, group
+  userState, setUserState, group, groupIndex, saveData
 }: props) {
+  const newList = () => {
+    // TODO: Create new list
+    setUserState(userState);
+    saveData();
+    console.log("New List");
+  }
+
+  const more = () => {
+    // TODO: Group more menu
+    setUserState(userState);
+    saveData();
+    console.log("More");
+  }
+
   return (
-    <div className="TaskGroup">
-      <div className="TaskGroup-title">
-        <h2>{group.name}</h2>
-        <img src="icons/more.png" alt="More"/>
-      </div>
-      <Droppable droppableId={group.id} type="list">
-        {(provided) => 
-          <div 
-            className="TaskList-wrapper"
-            ref={provided.innerRef}
-            {...provided.droppableProps}
+    <Draggable draggableId={group.id} index={groupIndex}>
+      {(provided) => 
+        <div className="TaskGroup"
+          {...provided.draggableProps}
+          ref={provided.innerRef}
+        >
+          <div className="TaskGroup-title"
+            {...provided.dragHandleProps}
           >
-            {
-              group.listIDs.map((id, listIndex) => 
-                <TaskList
-                  key={id}
-                  user={user}
-                  list={user.lists.get(id)!}
-                  listIndex={listIndex}
-                />
-              )
-            }
-            {provided.placeholder}
+            <h2>{group.name}</h2>
+            <div className="divider"></div>
+            <img src="icons/add.png" alt="Add"/>
+            <img src="icons/more.png" alt="More"/>
           </div>
-        }  
-        </Droppable>
-    </div>
+          <Droppable droppableId={group.id} type="list">
+            {(provided) => 
+              <div 
+                className="TaskList-wrapper"
+                ref={provided.innerRef}
+                {...provided.droppableProps}
+              >
+                {
+                  group.listIDs.map((id, listIndex) => 
+                    <TaskList
+                      key={id}
+                      userState={userState}
+                      setUserState={setUserState}
+                      saveData = {saveData}
+                      list={userState.lists.get(id)!}
+                      listIndex={listIndex}
+                    />
+                  )
+                }
+                {provided.placeholder}
+              </div>
+            }  
+            </Droppable>
+        </div>
+      }
+    </Draggable>
   );
 }

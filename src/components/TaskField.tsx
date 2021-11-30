@@ -1,19 +1,18 @@
 import '../styles/TaskField.scss';
 
-import { DragDropContext, DropResult } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
 import { UserType } from '../types/types';
 import TaskGroup from './TaskGroup';
-import { useState } from 'react';
 
 type props = {
-  user: UserType;
+  userState: UserType;
+  setUserState: React.Dispatch<React.SetStateAction<UserType>>;
+  saveData: () => void;
 }
 
 export default function TaskField({
-  user
+  userState, setUserState, saveData
 }: props) {
-  const [userState, setUserState] = useState(user);
-
   const onDragEnd = (result: DropResult) => {
     const { destination, source, draggableId, type } = result;
 
@@ -49,22 +48,38 @@ export default function TaskField({
         break;
     }
 
-    //setUserState(newUserState);
+    setUserState(newUserState);
+    saveData();
   }
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <div className="TaskField">
-        { 
-          userState.groupIDs.map(id => 
-            <TaskGroup
-              key={id}
-              user={userState}
-              group={userState.groups.get(id)!}
-            />
-          )
+      <Droppable 
+        droppableId="field"
+        direction="horizontal"
+        type="group"
+      > 
+        {(provided) =>
+          <div className="TaskField"
+            {...provided.droppableProps}
+            ref={provided.innerRef}
+          >
+            { 
+              userState.groupIDs.map((id, groupIndex) => 
+                <TaskGroup
+                  key={id}
+                  userState={userState}
+                  setUserState={setUserState}
+                  saveData = {saveData}
+                  group={userState.groups.get(id)!}
+                  groupIndex={groupIndex}
+                />
+              )
+            }
+            {provided.placeholder}
+          </div>
         }
-      </div>
+      </Droppable>
     </DragDropContext>
   );
 }
