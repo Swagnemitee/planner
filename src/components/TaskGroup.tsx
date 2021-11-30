@@ -17,24 +17,27 @@ export default function TaskGroup({
         <h2>{group.name}</h2>
         <img src="icons/more.png" alt="More"/>
       </div>
-     
+      <Droppable droppableId={group.id} type="list">
+        {(provided) => 
           <div 
             className="TaskList-wrapper"
-            
+            ref={provided.innerRef}
+            {...provided.droppableProps}
           >
             {
-              group.listIDs.map((id, index) => 
+              group.listIDs.map((id, listIndex) => 
                 <TaskList
                   key={id}
                   user={user}
                   list={user.lists.get(id)!}
-                  index={index}
+                  listIndex={listIndex}
                 />
               )
             }
-            
+            {provided.placeholder}
           </div>
-
+        }  
+        </Droppable>
     </div>
   );
 }

@@ -14,10 +14,7 @@ export default function Task({
   index,
 }: props) {
   return (
-    <Draggable
-      draggableId={task.id}
-      index={index}
-    >
+    <Draggable draggableId={task.id} index={index}>
       {provided => (
         <div className="Task" 
           ref={provided.innerRef}

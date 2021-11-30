@@ -3,7 +3,6 @@
 .TaskList {
   display: flex;
   flex-direction: column;
-  flex: 1 1 0px;
   background-color: $list_color;
 
   padding: 0.5em;
@@ -32,5 +31,7 @@
   > .Task-wrapper {
     display: flex;
     flex-direction: column;
+    flex: 1 1 0px;
+    background-color: white;
   }
 }

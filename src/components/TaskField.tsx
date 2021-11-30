@@ -15,7 +15,7 @@ export default function TaskField({
   const [userState, setUserState] = useState(user);
 
   const onDragEnd = (result: DropResult) => {
-    const { destination, source, draggableId } = result;
+    const { destination, source, draggableId, type } = result;
 
     if (!destination) return;
     
@@ -26,11 +26,28 @@ export default function TaskField({
 
     const newUserState = {...userState};
 
-    const sourceList = newUserState.lists.get(source.droppableId)!;
-    sourceList.taskIDs.splice(source.index, 1);
+    switch (type) {
+      case "task":
+        const sourceList = newUserState.lists.get(source.droppableId)!;
+        sourceList.taskIDs.splice(source.index, 1);
 
-    const destinationList = newUserState.lists.get(destination.droppableId)!;
-    destinationList.taskIDs.splice(destination.index, 0, draggableId);
+        const destinationList = newUserState.lists.get(destination.droppableId)!;
+        destinationList.taskIDs.splice(destination.index, 0, draggableId);
+        break;
+
+      case "list":
+        const sourceGroup = newUserState.groups.get(source.droppableId)!;
+        sourceGroup.listIDs.splice(source.index, 1);
+
+        const destinationGroup = newUserState.groups.get(destination.droppableId)!;
+        destinationGroup.listIDs.splice(destination.index, 0, draggableId);
+        break;
+
+      case "group":
+        newUserState.groupIDs.splice(source.index, 1);
+        newUserState.groupIDs.splice(destination.index, 0, draggableId);
+        break;
+    }
 
     //setUserState(newUserState);
   }
