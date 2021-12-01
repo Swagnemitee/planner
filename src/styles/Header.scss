@@ -5,4 +5,11 @@ Header {
   width: 100%;
   left: 0;
   background-color: $header_color;
+
+  > img {
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }

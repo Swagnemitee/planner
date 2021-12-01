@@ -11,7 +11,7 @@ export default function Header({
   userState, setUserState, saveData
 }: props) {
 
-  const newGroup = () => {
+  const newGroup = (): void => {
     // TODO: Create new group
     setUserState(userState);
     saveData();
@@ -20,7 +20,9 @@ export default function Header({
 
   return (
     <header>
-      <img src="icons/add.png" alt="Add"/>
+      <img src="icons/add.png" alt="Add"
+        onClick={() => newGroup()}
+      />
     </header>
   );
 }

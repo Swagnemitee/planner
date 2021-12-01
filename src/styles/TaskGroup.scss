@@ -20,6 +20,10 @@
     > img {
       visibility: hidden;
       height: 70%;
+
+      &:hover {
+        cursor: pointer;
+      }
     }
 
     &:hover {

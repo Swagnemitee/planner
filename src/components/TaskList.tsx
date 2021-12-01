@@ -14,18 +14,18 @@ type props = {
 export default function TaskList({
   userState, setUserState, list, listIndex, saveData
 }: props) {
-  const newTask = () => {
+  const newTask = (listID: string): void => {
     // TODO: Create new task
     setUserState(userState);
     saveData();
     console.log("New Task");
   }
 
-  const more = () => {
+  const showMore = (listID: string): void => {
     // TODO: List more menu
     setUserState(userState);
     saveData();
-    console.log("More");
+    console.log("Show More");
   }
 
 
@@ -41,8 +41,12 @@ export default function TaskList({
           >
             <h3>{list.name}</h3>
             <div className="divider"></div>
-            <img src="icons/add.png" alt="Add"/>
-            <img src="icons/more.png" alt="More"/>
+            <img src="icons/add.png" alt="Add"
+              onClick={() => newTask(list.id)}
+            />
+            <img src="icons/more.png" alt="More"
+              onClick={() => showMore(list.id)}
+            />
           </div>
           <Droppable droppableId={list.id} type="task">
             {provided => (

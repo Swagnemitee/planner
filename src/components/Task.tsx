@@ -14,7 +14,7 @@ export default function Task({
   userState, setUserState, task, index, saveData
 }: props) {
 
-  const doTask = (id: string) => {
+  const doTask = (id: string): void => {
     const newUserState = {...userState};
 
     const done = newUserState.tasks.get(id)!.done;

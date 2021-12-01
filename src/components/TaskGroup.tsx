@@ -14,18 +14,18 @@ type props = {
 export default function TaskGroup({
   userState, setUserState, group, groupIndex, saveData
 }: props) {
-  const newList = () => {
+  const newList = (groupID: string): void => {
     // TODO: Create new list
     setUserState(userState);
     saveData();
     console.log("New List");
   }
 
-  const more = () => {
+  const showMore = (groupID: string): void => {
     // TODO: Group more menu
     setUserState(userState);
     saveData();
-    console.log("More");
+    console.log("Show More");
   }
 
   return (
@@ -40,8 +40,12 @@ export default function TaskGroup({
           >
             <h2>{group.name}</h2>
             <div className="divider"></div>
-            <img src="icons/add.png" alt="Add"/>
-            <img src="icons/more.png" alt="More"/>
+            <img src="icons/add.png" alt="Add"
+              onClick={() => newList(group.id)}
+            />
+            <img src="icons/more.png" alt="More"
+              onClick={() => showMore(group.id)}
+            />
           </div>
           <Droppable droppableId={group.id} type="list">
             {(provided) => 
