@@ -8,15 +8,16 @@ type props = {
   userState: UserType;
   setUserState: React.Dispatch<React.SetStateAction<UserType>>;
   saveData: () => void;
-  setAddTask: React.Dispatch<React.SetStateAction<boolean>>;
-  setEditList: React.Dispatch<React.SetStateAction<boolean>>;
   setSelectedID: React.Dispatch<React.SetStateAction<string>>;
+  setEditList: React.Dispatch<React.SetStateAction<boolean>>;
+  setAddTask: React.Dispatch<React.SetStateAction<boolean>>;
+  setEditTask: React.Dispatch<React.SetStateAction<boolean>>;
   list: TaskListType;
   listIndex: number;
 }
 
 export default function TaskList({
-  userState, setUserState, list, listIndex, saveData, setAddTask, setEditList, setSelectedID
+  userState, setUserState, list, listIndex, saveData, setAddTask, setEditList, setSelectedID, setEditTask
 }: props) {
   return (
     <Draggable draggableId={list.id} index={listIndex}>
@@ -34,7 +35,7 @@ export default function TaskList({
               onClick={() =>{ setAddTask(true); setSelectedID(list.id)}}
             />
             <img src="icons/more.png" alt="More"
-              onClick={() => {setAddTask(true); setSelectedID(list.id)}}
+              onClick={() => {setEditList(true); setSelectedID(list.id)}}
             />
           </div>
           <Droppable droppableId={list.id} type="task">
@@ -51,6 +52,8 @@ export default function TaskList({
                       userState={userState}
                       setUserState={setUserState}
                       saveData = {saveData}
+                      setSelectedID={setSelectedID}
+                      setEditTask={setEditTask}
                       task={userState.tasks.get(id)!}
                       index={taskIndex}
                     />

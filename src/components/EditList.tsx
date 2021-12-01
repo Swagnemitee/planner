@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { UserType } from '../types/types';
-import { Reset } from '../types/enums';
 
 import '../styles/Add&Edit.scss';
 
@@ -8,51 +7,48 @@ type props = {
   userState: UserType;
   setUserState: React.Dispatch<React.SetStateAction<UserType>>;
   saveData: () => void;
-  setAddList: React.Dispatch<React.SetStateAction<boolean>>;
-  groupID: string;
+  setEditList: React.Dispatch<React.SetStateAction<boolean>>;
+  listID: string;
 }
 
-const defaultInputs = {
-  name: "",
-  reset: Reset.NEVER,
-}
-
-export default function AddList({
-  userState, setUserState, saveData, setAddList, groupID
+export default function EditList({
+  userState, setUserState, saveData, setEditList, listID
 }: props) {
   const closeWindow = (): void => {
-    setAddList(false);
+    setEditList(false);
   }
 
   const handleChange = (property: string, value: any): void => {
     setInputState({...inputState, [property]: value});
   }
 
-  const handleCreate = (): void => {
+  const handleSave = (): void => {
     let newUserState = {...userState};
 
-    let newID = (newUserState.nextID++).toString();
-    let newData = {...inputState, id: newID, taskIDs: []};
-
-    newUserState.lists.set(newID, newData);
-    newUserState.groups.get(groupID)!.listIDs.push(newID);
+    let oldData = newUserState.lists.get(listID)!;
+    let newData = {...oldData, ...inputState};
+    
+    newUserState.lists.set(listID, newData);
 
     setUserState({...newUserState});
-    setInputState(defaultInputs);
     saveData();
     closeWindow();
   }
 
-  const [inputState, setInputState] = useState(defaultInputs);
+  const handleDelete = (): void => {
+
+  }
+
+  const [inputState, setInputState] = useState(userState.lists.get(listID)!);
 
   return (
-    <div className="Add">
-      <div className="Add-bg"
+    <div className="Edit">
+      <div className="Edit-bg"
         onClick={closeWindow}
       ></div>
-      <div className="Add-main">
-        <div className="Add-main-inputs">
-          <div className="Add-main-inputs-name">
+      <div className="Edit-main">
+        <div className="Edit-main-inputs">
+          <div className="Edit-main-inputs-name">
             <label>List Name</label>
             <input 
               type="text" 
@@ -60,7 +56,7 @@ export default function AddList({
               onChange={(e) => handleChange("name", e.target.value)} 
             />
           </div>
-          <div className="Add-main-inputs-reset">
+          <div className="Edit-main-inputs-reset">
             <label>Resets</label>
             <select 
               value={inputState.reset} 
@@ -73,13 +69,16 @@ export default function AddList({
             </select>
           </div>
         </div>
-        <div className="Add-main-buttons">
+        <div className="Edit-main-buttons">
           <h3
             onClick={closeWindow}
           >Cancel</h3>
           <h3
-            onClick={handleCreate}
-          >Create</h3>
+            onClick={handleSave}
+          >Save</h3>
+          <h3 className="Edit-main-buttons-delete"
+            onClick={handleDelete}
+          >Delete</h3>
         </div>
       </div>
     </div>

@@ -27,7 +27,7 @@ export default function AddList({
     setInputState({...inputState, [property]: value});
   }
 
-  const create = (): void => {
+  const handleCreate = (): void => {
     let newUserState = {...userState};
 
     let newID = (newUserState.nextID++).toString();
@@ -64,7 +64,7 @@ export default function AddList({
             <input
               type="number" 
               value={inputState.count} 
-              onChange={(e) => handleChange("count", parseInt(e.target.value) || 0)} 
+              onChange={(e) => handleChange("count", e.target.value.replace(/\D/,''))} 
             />
           </div>
         </div>
@@ -73,7 +73,7 @@ export default function AddList({
             onClick={closeWindow}
           >Cancel</h3>
           <h3
-            onClick={create}
+            onClick={handleCreate}
           >Create</h3>
         </div>
       </div>

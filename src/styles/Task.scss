@@ -3,7 +3,6 @@
 .Task {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   gap: 1em;
   margin-bottom: 0.2em;
 
@@ -11,5 +10,9 @@
     text-decoration: line-through;
     font-style: italic;
     color: gray;
+  }
+
+  > img {
+    height: 50%;
   }
 }

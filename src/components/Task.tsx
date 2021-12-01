@@ -6,12 +6,14 @@ type props = {
   userState: UserType;
   setUserState: React.Dispatch<React.SetStateAction<UserType>>;
   saveData: () => void;
+  setSelectedID: React.Dispatch<React.SetStateAction<string>>;
+  setEditTask: React.Dispatch<React.SetStateAction<boolean>>;
   task: TaskType;
   index: number;
 }
 
 export default function Task({
-  userState, setUserState, task, index, saveData
+  userState, setUserState, task, index, saveData, setEditTask, setSelectedID
 }: props) {
 
   const doTask = (id: string): void => {
@@ -31,13 +33,17 @@ export default function Task({
     <Draggable draggableId={task.id} index={index}>
       {provided => (
         <div className={"Task" + (task.count <= task.done ? " completed" : "")}
-          onClick={() => doTask(task.id)}
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
         >
-          <p>{task.name}</p>
-          <p>{task.done}/{task.count}</p>
+          <p
+            onClick={() => {setEditTask(true); setSelectedID(task.id)}}
+          >{task.name}</p>
+          <div className="divider"></div>
+          <p
+            onClick={() => doTask(task.id)}
+          >{task.done}/{task.count}</p>
         </div>
       )}
     </Draggable>

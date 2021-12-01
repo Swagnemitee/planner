@@ -6,6 +6,9 @@ import TaskGroup from './TaskGroup';
 import { useState } from 'react';
 import AddList from './AddList';
 import AddTask from './AddTask';
+import EditTask from './EditTask';
+import EditGroup from './EditGroup';
+import EditList from './EditList';
 
 type props = {
   userState: UserType;
@@ -55,6 +58,8 @@ export default function TaskField({
     saveData();
   }
 
+  // TODO: Edit screens
+
   const [editGroup, setEditGroup] = useState(false);
   const [addList, setAddList] = useState(false);
   const [editList, setEditList] = useState(false);
@@ -82,11 +87,12 @@ export default function TaskField({
                     userState={userState}
                     setUserState={setUserState}
                     saveData = {saveData}
-                    setAddList={setAddList}
-                    setEditGroup={setEditGroup}
-                    setAddTask={setAddTask}
-                    setEditList={setEditList}
                     setSelectedID={setSelectedID}
+                    setEditGroup={setEditGroup}
+                    setAddList={setAddList}
+                    setEditList={setEditList}
+                    setAddTask={setAddTask}
+                    setEditTask={setEditTask}
                     group={userState.groups.get(id)!}
                     groupIndex={groupIndex}
                   />
@@ -98,13 +104,33 @@ export default function TaskField({
         </Droppable>
       </DragDropContext>
       {
+        editGroup &&
+        <EditGroup 
+          userState={userState}
+          setUserState={setUserState}
+          saveData={saveData}
+          setEditGroup={setEditGroup}
+          groupID={selectedID}
+        />
+      }
+      {
         addList &&
         <AddList 
           userState={userState}
           setUserState={setUserState}
           saveData={saveData}
-          groupID={selectedID}
           setAddList={setAddList}
+          groupID={selectedID}
+        />
+      }
+      {
+        editList &&
+        <EditList 
+          userState={userState}
+          setUserState={setUserState}
+          saveData={saveData}
+          setEditList={setEditList}
+          listID={selectedID}
         />
       }
       {
@@ -113,8 +139,18 @@ export default function TaskField({
           userState={userState}
           setUserState={setUserState}
           saveData={saveData}
-          listID={selectedID}
           setAddTask={setAddTask}
+          listID={selectedID}
+        />
+      }
+      {
+        editTask &&
+        <EditTask 
+          userState={userState}
+          setUserState={setUserState}
+          saveData={saveData}
+          setEditTask={setEditTask}
+          taskID={selectedID}
         />
       }
     </>
