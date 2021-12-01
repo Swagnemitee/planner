@@ -7,27 +7,18 @@ type props = {
   userState: UserType;
   setUserState: React.Dispatch<React.SetStateAction<UserType>>;
   saveData: () => void;
+  setAddList: React.Dispatch<React.SetStateAction<boolean>>;
+  setEditGroup: React.Dispatch<React.SetStateAction<boolean>>;
+  setAddTask: React.Dispatch<React.SetStateAction<boolean>>;
+  setEditList: React.Dispatch<React.SetStateAction<boolean>>;
+  setSelectedID: React.Dispatch<React.SetStateAction<string>>;
   group: TaskGroupType;
   groupIndex: number;
 }
 
 export default function TaskGroup({
-  userState, setUserState, group, groupIndex, saveData
+  userState, setUserState, group, groupIndex, saveData, setAddList, setEditGroup, setSelectedID, setAddTask, setEditList
 }: props) {
-  const newList = (groupID: string): void => {
-    // TODO: Create new list
-    setUserState(userState);
-    saveData();
-    console.log("New List");
-  }
-
-  const showMore = (groupID: string): void => {
-    // TODO: Group more menu
-    setUserState(userState);
-    saveData();
-    console.log("Show More");
-  }
-
   return (
     <Draggable draggableId={group.id} index={groupIndex}>
       {(provided) => 
@@ -41,10 +32,10 @@ export default function TaskGroup({
             <h2>{group.name}</h2>
             <div className="divider"></div>
             <img src="icons/add.png" alt="Add"
-              onClick={() => newList(group.id)}
+              onClick={() =>{ setAddList(true); setSelectedID(group.id)}}
             />
             <img src="icons/more.png" alt="More"
-              onClick={() => showMore(group.id)}
+              onClick={() => {setEditGroup(true); setSelectedID(group.id)}}
             />
           </div>
           <Droppable droppableId={group.id} type="list">
@@ -61,6 +52,9 @@ export default function TaskGroup({
                       userState={userState}
                       setUserState={setUserState}
                       saveData = {saveData}
+                      setAddTask={setAddTask}
+                      setEditList={setEditList}
+                      setSelectedID={setSelectedID}
                       list={userState.lists.get(id)!}
                       listIndex={listIndex}
                     />

@@ -3,6 +3,9 @@ import '../styles/TaskField.scss';
 import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
 import { UserType } from '../types/types';
 import TaskGroup from './TaskGroup';
+import { useState } from 'react';
+import AddList from './AddList';
+import AddTask from './AddTask';
 
 type props = {
   userState: UserType;
@@ -52,34 +55,68 @@ export default function TaskField({
     saveData();
   }
 
+  const [editGroup, setEditGroup] = useState(false);
+  const [addList, setAddList] = useState(false);
+  const [editList, setEditList] = useState(false);
+  const [addTask, setAddTask] = useState(false);
+  const [editTask, setEditTask] = useState(false);
+  const [selectedID, setSelectedID] = useState("");
+
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
-      <Droppable 
-        droppableId="field"
-        direction="horizontal"
-        type="group"
-      > 
-        {(provided) =>
-          <div className="TaskField"
-            {...provided.droppableProps}
-            ref={provided.innerRef}
-          >
-            { 
-              userState.groupIDs.map((id, groupIndex) => 
-                <TaskGroup
-                  key={id}
-                  userState={userState}
-                  setUserState={setUserState}
-                  saveData = {saveData}
-                  group={userState.groups.get(id)!}
-                  groupIndex={groupIndex}
-                />
-              )
-            }
-            {provided.placeholder}
-          </div>
-        }
-      </Droppable>
-    </DragDropContext>
+    <>
+      <DragDropContext onDragEnd={onDragEnd}>
+        <Droppable 
+          droppableId="field"
+          direction="horizontal"
+          type="group"
+        > 
+          {(provided) =>
+            <div className="TaskField"
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+            >
+              { 
+                userState.groupIDs.map((id, groupIndex) => 
+                  <TaskGroup
+                    key={id}
+                    userState={userState}
+                    setUserState={setUserState}
+                    saveData = {saveData}
+                    setAddList={setAddList}
+                    setEditGroup={setEditGroup}
+                    setAddTask={setAddTask}
+                    setEditList={setEditList}
+                    setSelectedID={setSelectedID}
+                    group={userState.groups.get(id)!}
+                    groupIndex={groupIndex}
+                  />
+                )
+              }
+              {provided.placeholder}
+            </div>
+          }
+        </Droppable>
+      </DragDropContext>
+      {
+        addList &&
+        <AddList 
+          userState={userState}
+          setUserState={setUserState}
+          saveData={saveData}
+          groupID={selectedID}
+          setAddList={setAddList}
+        />
+      }
+      {
+        addTask &&
+        <AddTask 
+          userState={userState}
+          setUserState={setUserState}
+          saveData={saveData}
+          listID={selectedID}
+          setAddTask={setAddTask}
+        />
+      }
+    </>
   );
 }

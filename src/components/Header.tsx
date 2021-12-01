@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import '../styles/Header.scss';
 import { UserType } from '../types/types';
+import AddGroup from './AddGroup';
 
 type props = {
   userState: UserType;
@@ -10,19 +12,24 @@ type props = {
 export default function Header({
   userState, setUserState, saveData
 }: props) {
-
-  const newGroup = (): void => {
-    // TODO: Create new group
-    setUserState(userState);
-    saveData();
-    console.log("New Group");
-  }
+  const [addGroup, setAddGroup] = useState(false);
 
   return (
-    <header>
-      <img src="icons/add.png" alt="Add"
-        onClick={() => newGroup()}
-      />
-    </header>
+    <>
+      <header>
+        <img src="icons/add.png" alt="Add"
+          onClick={() => setAddGroup(true)}
+        />
+      </header>
+      {
+        addGroup &&
+        <AddGroup
+          userState = {userState}
+          setUserState = {setUserState}
+          saveData = {saveData}
+          setAddGroup={setAddGroup}
+        />
+      }
+    </>
   );
 }
