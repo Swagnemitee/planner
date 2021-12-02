@@ -36,7 +36,23 @@ export default function EditGroup({
   }
 
   const handleDelete = (): void => {
+    let newUserState = {...userState};
 
+    const listIDs = newUserState.groups.get(groupID)!.listIDs;
+    const taskIDs = listIDs.flatMap((l) => newUserState.lists.get(l)!.taskIDs);
+
+    newUserState.groupIDs.splice(newUserState.groupIDs.indexOf(groupID), 1);
+    newUserState.groups.delete(groupID);
+    listIDs.forEach(listID => {
+      newUserState.lists.delete(listID);
+    });
+    taskIDs.forEach(taskID => {
+      newUserState.tasks.delete(taskID);
+    });
+
+    setUserState({...newUserState});
+    saveData();
+    closeWindow();
   }
 
   const [inputState, setInputState] = useState(userState.groups.get(groupID)!);

@@ -8,11 +8,12 @@ type props = {
   setUserState: React.Dispatch<React.SetStateAction<UserType>>;
   saveData: () => void;
   setEditTask: React.Dispatch<React.SetStateAction<boolean>>;
+  listID: string;
   taskID: string;
 }
 
 export default function AddGroup({
-  userState, setUserState, saveData, setEditTask, taskID
+  userState, setUserState, saveData, setEditTask, taskID, listID
 }: props) {
   const closeWindow = (): void => {
     setEditTask(false);
@@ -36,7 +37,16 @@ export default function AddGroup({
   }
 
   const handleDelete = (): void => {
+    let newUserState = {...userState};
 
+    let newList = newUserState.lists.get(listID)!;
+
+    newList.taskIDs.splice(newList.taskIDs.indexOf(taskID), 1)
+    newUserState.tasks.delete(taskID);
+
+    setUserState({...newUserState});
+    saveData();
+    closeWindow();
   }
 
   const [inputState, setInputState] = useState(userState.tasks.get(taskID)!);

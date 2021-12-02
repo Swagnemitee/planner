@@ -8,12 +8,14 @@ type props = {
   saveData: () => void;
   setSelectedID: React.Dispatch<React.SetStateAction<string>>;
   setEditTask: React.Dispatch<React.SetStateAction<boolean>>;
+  setSelectedParentID: React.Dispatch<React.SetStateAction<string>>;
+  parentID: string;
   task: TaskType;
   index: number;
 }
 
 export default function Task({
-  userState, setUserState, task, index, saveData, setEditTask, setSelectedID
+  userState, setUserState, task, index, saveData, setEditTask, setSelectedID, parentID, setSelectedParentID
 }: props) {
 
   const doTask = (id: string): void => {
@@ -38,7 +40,7 @@ export default function Task({
           {...provided.dragHandleProps}
         >
           <p
-            onClick={() => {setEditTask(true); setSelectedID(task.id)}}
+            onClick={() => {setEditTask(true); setSelectedID(task.id); setSelectedParentID(parentID)}}
           >{task.name}</p>
           <div className="divider"></div>
           <p

@@ -13,12 +13,13 @@ type props = {
   setEditList: React.Dispatch<React.SetStateAction<boolean>>;
   setAddTask: React.Dispatch<React.SetStateAction<boolean>>;
   setEditTask: React.Dispatch<React.SetStateAction<boolean>>;
+  setSelectedParentID: React.Dispatch<React.SetStateAction<string>>;
   group: TaskGroupType;
   groupIndex: number;
 }
 
 export default function TaskGroup({
-  userState, setUserState, group, groupIndex, saveData, setAddList, setEditGroup, setSelectedID, setAddTask, setEditList, setEditTask
+  userState, setUserState, group, groupIndex, saveData, setAddList, setEditGroup, setSelectedID, setAddTask, setEditList, setEditTask, setSelectedParentID
 }: props) {
   return (
     <Draggable draggableId={group.id} index={groupIndex}>
@@ -57,6 +58,8 @@ export default function TaskGroup({
                       setEditList={setEditList}
                       setAddTask={setAddTask}
                       setEditTask={setEditTask}
+                      setSelectedParentID={setSelectedParentID}
+                      parentID={group.id}
                       list={userState.lists.get(id)!}
                       listIndex={listIndex}
                     />

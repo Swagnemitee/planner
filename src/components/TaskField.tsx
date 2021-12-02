@@ -58,14 +58,13 @@ export default function TaskField({
     saveData();
   }
 
-  // TODO: Edit screens
-
   const [editGroup, setEditGroup] = useState(false);
   const [addList, setAddList] = useState(false);
   const [editList, setEditList] = useState(false);
   const [addTask, setAddTask] = useState(false);
   const [editTask, setEditTask] = useState(false);
   const [selectedID, setSelectedID] = useState("");
+  const [selectedParentID, setSelectedParentID] = useState("");
 
   return (
     <>
@@ -93,6 +92,7 @@ export default function TaskField({
                     setEditList={setEditList}
                     setAddTask={setAddTask}
                     setEditTask={setEditTask}
+                    setSelectedParentID={setSelectedParentID}
                     group={userState.groups.get(id)!}
                     groupIndex={groupIndex}
                   />
@@ -130,6 +130,7 @@ export default function TaskField({
           setUserState={setUserState}
           saveData={saveData}
           setEditList={setEditList}
+          groupID={selectedParentID}
           listID={selectedID}
         />
       }
@@ -150,6 +151,7 @@ export default function TaskField({
           setUserState={setUserState}
           saveData={saveData}
           setEditTask={setEditTask}
+          listID={selectedParentID}
           taskID={selectedID}
         />
       }

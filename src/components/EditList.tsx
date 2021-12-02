@@ -8,11 +8,12 @@ type props = {
   setUserState: React.Dispatch<React.SetStateAction<UserType>>;
   saveData: () => void;
   setEditList: React.Dispatch<React.SetStateAction<boolean>>;
+  groupID: string;
   listID: string;
 }
 
 export default function EditList({
-  userState, setUserState, saveData, setEditList, listID
+  userState, setUserState, saveData, setEditList, listID, groupID
 }: props) {
   const closeWindow = (): void => {
     setEditList(false);
@@ -36,7 +37,21 @@ export default function EditList({
   }
 
   const handleDelete = (): void => {
+    let newUserState = {...userState};
 
+    const taskIDs = newUserState.lists.get(listID)!.taskIDs;
+
+    let newGroup = newUserState.groups.get(groupID)!;
+
+    newGroup.listIDs.splice(newGroup.listIDs.indexOf(listID), 1)
+    newUserState.lists.delete(listID);
+    taskIDs.forEach(taskID => {
+      newUserState.tasks.delete(taskID);
+    });
+
+    setUserState({...newUserState});
+    saveData();
+    closeWindow();
   }
 
   const [inputState, setInputState] = useState(userState.lists.get(listID)!);
