@@ -33,18 +33,18 @@ export default function TaskField({
 
     switch (type) {
       case "task":
-        const sourceList = newUserState.lists.get(source.droppableId)!;
+        const sourceList = newUserState.lists[source.droppableId];
         sourceList.taskIDs.splice(source.index, 1);
 
-        const destinationList = newUserState.lists.get(destination.droppableId)!;
+        const destinationList = newUserState.lists[destination.droppableId];
         destinationList.taskIDs.splice(destination.index, 0, draggableId);
         break;
 
       case "list":
-        const sourceGroup = newUserState.groups.get(source.droppableId)!;
+        const sourceGroup = newUserState.groups[source.droppableId];
         sourceGroup.listIDs.splice(source.index, 1);
 
-        const destinationGroup = newUserState.groups.get(destination.droppableId)!;
+        const destinationGroup = newUserState.groups[destination.droppableId];
         destinationGroup.listIDs.splice(destination.index, 0, draggableId);
         break;
 
@@ -93,7 +93,7 @@ export default function TaskField({
                     setAddTask={setAddTask}
                     setEditTask={setEditTask}
                     setSelectedParentID={setSelectedParentID}
-                    group={userState.groups.get(id)!}
+                    group={userState.groups[id]}
                     groupIndex={groupIndex}
                   />
                 )

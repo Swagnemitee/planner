@@ -7,36 +7,60 @@ import TaskField from "./TaskField";
 
 export default function App() {
   const saveData = (): void => {
-    // TODO: save to localStorage
+    // TODO: save userState to localStorage
     console.log(userState);
   }
-  
+
   const loadData = (): UserType => {
     // TODO: load from localStorage
+    // TODO: reset lists according to list.reset
 
     return {
       lastLogin: Date.now(),
       nextID: 10,
       groupIDs: ["1", "2", "3"], 
-      groups: new Map([
-        ["1", {id: "1", name: "Home", listIDs: ["4", "6"]}],
-        ["2", {id: "2", name: "Outside", listIDs: ["5"]}],
-        ["3", {id: "3", name: "Monkey", listIDs: []}]
-      ]),
-      lists: new Map([
-        ["4", {id: "4", name: "Daily", reset: Reset.DAY, taskIDs: ["7", "8"]}],
-        ["5", {id: "5", name: "Weekly", reset: Reset.WEEK, taskIDs: []}],
-        ["6", {id: "6", name: "Hotel?", reset: Reset.NEVER, taskIDs: ["9"]}]
-      ]),
-      tasks: new Map([
-        ["7", {id: "7", name: "Dishes", done: 0, count: 1}],
-        ["8", {id: "8", name: "Study", done: 5, count: 8}],
-        ["9", {id: "9", name: "Trivago.", done: 0, count: 3}]
-      ]),
+      groups: {
+        "1": {id: "1", name: "Home", listIDs: ["4", "6"]},
+        "2": {id: "2", name: "Outside", listIDs: ["5"]},
+        "3": {id: "3", name: "Monkey", listIDs: []}
+      },
+      lists: {
+        "4": {id: "4", name: "Daily", reset: Reset.DAY, taskIDs: ["7", "8"]},
+        "5": {id: "5", name: "Weekly", reset: Reset.WEEK, taskIDs: []},
+        "6": {id: "6", name: "Hotel?", reset: Reset.NEVER, taskIDs: ["9"]}
+      },
+      tasks: {
+        "7": {id: "7", name: "Dishes", done: 0, count: 1},
+        "8": {id: "8", name: "Study", done: 5, count: 8},
+        "9": {id: "9", name: "Trivago.", done: 0, count: 3}
+      },
     }
   }
 
+  const saveMemento = (): void => {
+    // TODO: save memento to sessionStorage
+    // TODO: add saveMemento to all functions
+    const newMementoIndex = mementoIndex + 1;
+    const newMemento = [...mementos];
+    newMemento.push(stringifyData(userState));
+
+    setMementos([...newMemento]);
+    setMementoIndex(newMementoIndex);
+  }
+
+  const parseData = (data: string): UserType => {
+    // TODO: string to UserType
+    return {} as UserType;
+  }
+
+  const stringifyData = (data: UserType): string => {
+    // TODO: UserType to string
+    return "a";
+  }
+
   const [userState, setUserState] = useState(loadData());
+  const [mementos, setMementos] = useState([] as string[]);
+  const [mementoIndex, setMementoIndex] = useState(-1);
   
   return (
     <div className="App">

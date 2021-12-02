@@ -57,7 +57,7 @@ export default function TaskList({
                       setEditTask={setEditTask}
                       setSelectedParentID={setSelectedParentID}
                       parentID={list.id}
-                      task={userState.tasks.get(id)!}
+                      task={userState.tasks[id]}
                       index={taskIndex}
                     />
                   )

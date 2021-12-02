@@ -31,7 +31,7 @@ export default function AddGroup({
     let newID = (newUserState.nextID++).toString();
     let newData = {...inputState, id: newID, listIDs: []};
 
-    newUserState.groups.set(newID, newData);
+    newUserState.groups[newID] = newData;
     newUserState.groupIDs.push(newID);
 
     setUserState({...newUserState});

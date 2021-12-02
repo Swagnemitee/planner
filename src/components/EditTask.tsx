@@ -26,10 +26,10 @@ export default function AddGroup({
   const handleSave = (): void => {
     let newUserState = {...userState};
 
-    let oldData = newUserState.tasks.get(taskID)!;
+    let oldData = newUserState.tasks[taskID];
     let newData = {...oldData, ...inputState};
     
-    newUserState.tasks.set(taskID, newData);
+    newUserState.tasks[taskID] = newData;
 
     setUserState({...newUserState});
     saveData();
@@ -39,17 +39,17 @@ export default function AddGroup({
   const handleDelete = (): void => {
     let newUserState = {...userState};
 
-    let newList = newUserState.lists.get(listID)!;
+    let newList = newUserState.lists[listID];
 
     newList.taskIDs.splice(newList.taskIDs.indexOf(taskID), 1)
-    newUserState.tasks.delete(taskID);
+    delete newUserState.tasks[taskID];
 
     setUserState({...newUserState});
     saveData();
     closeWindow();
   }
 
-  const [inputState, setInputState] = useState(userState.tasks.get(taskID)!);
+  const [inputState, setInputState] = useState(userState.tasks[taskID]);
 
   return (
     <div className="Edit">

@@ -26,10 +26,10 @@ export default function EditList({
   const handleSave = (): void => {
     let newUserState = {...userState};
 
-    let oldData = newUserState.lists.get(listID)!;
+    let oldData = newUserState.lists[listID];
     let newData = {...oldData, ...inputState};
     
-    newUserState.lists.set(listID, newData);
+    newUserState.lists[listID] = newData;
 
     setUserState({...newUserState});
     saveData();
@@ -39,14 +39,14 @@ export default function EditList({
   const handleDelete = (): void => {
     let newUserState = {...userState};
 
-    const taskIDs = newUserState.lists.get(listID)!.taskIDs;
+    const taskIDs = newUserState.lists[listID].taskIDs;
 
-    let newGroup = newUserState.groups.get(groupID)!;
+    let newGroup = newUserState.groups[groupID];
 
     newGroup.listIDs.splice(newGroup.listIDs.indexOf(listID), 1)
-    newUserState.lists.delete(listID);
+    delete newUserState.lists[listID];
     taskIDs.forEach(taskID => {
-      newUserState.tasks.delete(taskID);
+      delete newUserState.tasks[taskID];
     });
 
     setUserState({...newUserState});
@@ -54,7 +54,7 @@ export default function EditList({
     closeWindow();
   }
 
-  const [inputState, setInputState] = useState(userState.lists.get(listID)!);
+  const [inputState, setInputState] = useState(userState.lists[listID]);
 
   return (
     <div className="Edit">

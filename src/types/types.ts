@@ -4,9 +4,9 @@ export type UserType = {
   lastLogin: number;
   nextID: number;
   groupIDs: string[];
-  groups: Map<string, TaskGroupType>;
-  lists: Map<string, TaskListType>;
-  tasks: Map<string, TaskType>;
+  groups: {[key: string]: TaskGroupType};
+  lists: {[key: string]: TaskListType};
+  tasks: {[key: string]: TaskType};
 }
 
 export type TaskGroupType = {

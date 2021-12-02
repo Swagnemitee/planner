@@ -21,12 +21,12 @@ export default function Task({
   const doTask = (id: string): void => {
     const newUserState = {...userState};
 
-    const done = newUserState.tasks.get(id)!.done;
-    const count = newUserState.tasks.get(id)!.count;
+    const done = newUserState.tasks[id].done;
+    const count = newUserState.tasks[id].count;
 
     if (count <= done) return;
 
-    newUserState.tasks.get(id)!.done++;
+    newUserState.tasks[id].done++;
     setUserState(newUserState);
     saveData();
   }

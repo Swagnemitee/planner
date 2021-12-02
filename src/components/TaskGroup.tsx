@@ -60,7 +60,7 @@ export default function TaskGroup({
                       setEditTask={setEditTask}
                       setSelectedParentID={setSelectedParentID}
                       parentID={group.id}
-                      list={userState.lists.get(id)!}
+                      list={userState.lists[id]}
                       listIndex={listIndex}
                     />
                   )

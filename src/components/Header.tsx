@@ -12,6 +12,14 @@ type props = {
 export default function Header({
   userState, setUserState, saveData
 }: props) {
+  const undo = () => {
+
+  }
+
+  const redo = () => {
+
+  }
+
   const [addGroup, setAddGroup] = useState(false);
 
   return (

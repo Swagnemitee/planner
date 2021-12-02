@@ -25,10 +25,10 @@ export default function EditGroup({
   const handleSave = (): void => {
     let newUserState = {...userState};
 
-    let oldData = newUserState.groups.get(groupID)!;
+    let oldData = newUserState.groups[groupID];
     let newData = {...oldData, ...inputState};
     
-    newUserState.groups.set(groupID, newData);
+    newUserState.groups[groupID] = newData;
 
     setUserState({...newUserState});
     saveData();
@@ -38,16 +38,16 @@ export default function EditGroup({
   const handleDelete = (): void => {
     let newUserState = {...userState};
 
-    const listIDs = newUserState.groups.get(groupID)!.listIDs;
-    const taskIDs = listIDs.flatMap((l) => newUserState.lists.get(l)!.taskIDs);
+    const listIDs = newUserState.groups[groupID].listIDs;
+    const taskIDs = listIDs.flatMap((l) => newUserState.lists[l].taskIDs);
 
     newUserState.groupIDs.splice(newUserState.groupIDs.indexOf(groupID), 1);
-    newUserState.groups.delete(groupID);
+    delete newUserState.groups[groupID];
     listIDs.forEach(listID => {
-      newUserState.lists.delete(listID);
+      delete newUserState.lists[listID];
     });
     taskIDs.forEach(taskID => {
-      newUserState.tasks.delete(taskID);
+      delete newUserState.tasks[taskID];
     });
 
     setUserState({...newUserState});
@@ -55,7 +55,7 @@ export default function EditGroup({
     closeWindow();
   }
 
-  const [inputState, setInputState] = useState(userState.groups.get(groupID)!);
+  const [inputState, setInputState] = useState(userState.groups[groupID]);
 
   return (
     <div className="Edit">

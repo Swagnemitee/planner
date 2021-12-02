@@ -33,8 +33,8 @@ export default function AddList({
     let newID = (newUserState.nextID++).toString();
     let newData = {...inputState, id: newID, done: 0};
 
-    newUserState.tasks.set(newID, newData);
-    newUserState.lists.get(listID)!.taskIDs.push(newID);
+    newUserState.tasks[newID] = newData;
+    newUserState.lists[listID].taskIDs.push(newID);
 
     setUserState({...newUserState});
     setInputState(defaultInputs);
