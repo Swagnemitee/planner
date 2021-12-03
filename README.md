@@ -1,46 +1,43 @@
-# Getting Started with Create React App
+# Planner
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a web app that helps you plan and track your days. Keeping track of your tasks and visualizing them can increase your productivity and help you build habits. It has an intuitive and easy to use interface that you can costumize. \
+The web app is hosted at [planner.swagnemite.com](https://planner.swagnemite.com). It is designed for use on a large screen, it does not work on mobile.
+##### I do not have access any kind of data. All data is stored on your device locally.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- [x] - Create tasks and keep track of them as you complete
+- [x] - Insert tasks into lists that be can automatically reset every day, week or month
+- [x] - Organize lists into groups to keep your planner tidy and coherent
+- [x] - Drag and drop tasks, lists and groups to quickly edit your planner
+- [x] - Undo and redo every action to correct your mistakes
 
-### `npm start`
+## How to Use
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+* Click on the plus sign on upper right corner to create a group
+* Hovering the mouse over a group or list name creates two buttons that can be pressed to edit that group or list
+* Click on the plus sign on a group to create a list in that group
+* Click on the plus sign on a list to create a task in that group
+* Click on the three dots to edit a list or a group
+* Click on the number next to a task to complete that task once
+* Click on a task's name to edit that task
+* Click on the left arrow on upper right corner to undo the last change
+* Click on the right arrow on upper right corner to redo the last undo
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Future Plans
 
-### `npm test`
+If I continue working on this, there are a few features I want to implement:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- [ ] - Users can assign a value to tasks and they will be awarded with points when they complete these tasks
+- [ ] - Users can add goals to groups and achieve them by earning a certain amount of points in that group
+- [ ] - Keep track of the amount of points received on a daily, weekly and monthly basis
+- [ ] - Users can check their past points and compare to their current progress
 
-### `npm run build`
+## Technologies Used
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+* [React](https://www.npmjs.com/package/react) to build the website
+* [TypeScript](https://www.npmjs.com/package/typescript) to make JavaScript type enforced
+* [dayjs](https://www.npmjs.com/package/dayjs) to take care of dates
+* [sass](https://www.npmjs.com/package/sass) to have cleaner CSS files
+* [react-beautiful-dnd](https://www.npmjs.com/package/react-beautiful-dnd) to handle the drag and drop function
+* [lodash](https://www.npmjs.com/package/lodash) to deal with objects and arrays easier
