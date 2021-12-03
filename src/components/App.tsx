@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import { useState } from 'react';
 import '../styles/App.scss';
 import { Reset } from "../types/enums";
@@ -5,17 +6,21 @@ import { UserType } from "../types/types";
 import Header from "./Header";
 import TaskField from "./TaskField";
 
+import updateLocale from 'dayjs/plugin/updateLocale';
+dayjs.extend(updateLocale);
+
+dayjs.updateLocale('en', {
+  weekStart: 1,
+});
+
 export default function App() {
-  const saveData = (): void => {
-    // TODO: save userState to localStorage
-    // console.log(userState);
+  const saveData = (userData: UserType = userState): void => {
+    localStorage.setItem("user", JSON.stringify(userData));
   }
 
   const loadData = (): UserType => {
-    // TODO: load from localStorage
-    // TODO: reset lists according to list.reset
-
-    return {
+    const localUser = localStorage.getItem("user");
+    let user: UserType = localUser ? JSON.parse(localUser) : {
       lastLogin: Date.now(),
       nextID: 10,
       groupIDs: ["1", "2", "3"], 
@@ -34,11 +39,45 @@ export default function App() {
         "8": {id: "8", name: "Study", done: 5, count: 8},
         "9": {id: "9", name: "Trivago.", done: 0, count: 3}
       },
+    };
+
+    const now = Date.now() //1639151497000;
+
+    const d1 = dayjs(user.lastLogin);
+    const d2 = dayjs(now);
+
+    const sameMonth = d1.isSame(d2, "month");
+    const sameWeek = d1.isSame(d2, "week");
+    const sameDay = d1.isSame(d2, "day");
+
+    console.log(d1, d2)
+    console.log(sameDay, sameWeek, sameMonth);
+    console.log(d1.locale())
+
+    for (const listID in user.lists) {
+      const list = user.lists[listID];
+      if (
+        (list.reset === "day" && !sameDay) ||
+        (list.reset === "week" && !sameWeek) ||
+        (list.reset === "month" && !sameMonth)
+      ) {
+        resetTasks(user, list.taskIDs);
+      }
+    }
+    
+    user.lastLogin = now;
+    saveData(user);
+
+    return user;
+  }
+
+  const resetTasks = (user: UserType, taskIDs: string[]): void  => {
+    for (const taskID of taskIDs) {
+      user.tasks[taskID].done = 0;
     }
   }
 
   const saveMemento = (): void => {
-    // TODO: save memento to sessionStorage
     const newMementos = [...mementos];
     newMementos.splice(mementoIndex);
     newMementos.push(JSON.stringify(userState));

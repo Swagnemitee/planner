@@ -2,11 +2,17 @@
 
 Header {
   position: absolute;
+  display: flex;
+  justify-content: flex-end;
   width: 100%;
   left: 0;
   background-color: $header_color;
 
   > img {
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
 
     &:hover {
       cursor: pointer;
