@@ -11,5 +11,10 @@ Header {
     &:hover {
       cursor: pointer;
     }
+
+    &.disabled {
+      opacity: 0.3;
+      cursor: default;
+    }
   }
 }

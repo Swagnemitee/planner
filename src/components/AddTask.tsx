@@ -8,6 +8,7 @@ type props = {
   setUserState: React.Dispatch<React.SetStateAction<UserType>>;
   saveData: () => void;
   setAddTask: React.Dispatch<React.SetStateAction<boolean>>;
+  saveMemento: () => void;
   listID: string;
 }
 
@@ -17,7 +18,7 @@ const defaultInputs = {
 }
 
 export default function AddList({
-  userState, setUserState, saveData, setAddTask, listID
+  userState, setUserState, saveData, setAddTask, listID, saveMemento
 }: props) {
   const closeWindow = (): void => {
     setAddTask(false);
@@ -28,6 +29,8 @@ export default function AddList({
   }
 
   const handleCreate = (): void => {
+    saveMemento();
+
     let newUserState = {...userState};
 
     let newID = (newUserState.nextID++).toString();

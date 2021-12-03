@@ -14,10 +14,11 @@ type props = {
   userState: UserType;
   setUserState: React.Dispatch<React.SetStateAction<UserType>>;
   saveData: () => void;
+  saveMemento: () => void;
 }
 
 export default function TaskField({
-  userState, setUserState, saveData
+  userState, setUserState, saveData, saveMemento
 }: props) {
   const onDragEnd = (result: DropResult) => {
     const { destination, source, draggableId, type } = result;
@@ -28,6 +29,8 @@ export default function TaskField({
       destination.droppableId === source.droppableId &&
       destination.index === source.index
     ) return;
+
+    saveMemento();
 
     const newUserState = {...userState};
 
@@ -110,6 +113,7 @@ export default function TaskField({
           setUserState={setUserState}
           saveData={saveData}
           setEditGroup={setEditGroup}
+          saveMemento = {saveMemento}
           groupID={selectedID}
         />
       }
@@ -120,6 +124,7 @@ export default function TaskField({
           setUserState={setUserState}
           saveData={saveData}
           setAddList={setAddList}
+          saveMemento = {saveMemento}
           groupID={selectedID}
         />
       }
@@ -130,6 +135,7 @@ export default function TaskField({
           setUserState={setUserState}
           saveData={saveData}
           setEditList={setEditList}
+          saveMemento = {saveMemento}
           groupID={selectedParentID}
           listID={selectedID}
         />
@@ -141,6 +147,7 @@ export default function TaskField({
           setUserState={setUserState}
           saveData={saveData}
           setAddTask={setAddTask}
+          saveMemento = {saveMemento}
           listID={selectedID}
         />
       }
@@ -151,6 +158,7 @@ export default function TaskField({
           setUserState={setUserState}
           saveData={saveData}
           setEditTask={setEditTask}
+          saveMemento = {saveMemento}
           listID={selectedParentID}
           taskID={selectedID}
         />

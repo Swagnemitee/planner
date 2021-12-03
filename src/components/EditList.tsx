@@ -2,18 +2,20 @@ import { useState } from 'react';
 import { UserType } from '../types/types';
 
 import '../styles/Add&Edit.scss';
+import _ from 'lodash';
 
 type props = {
   userState: UserType;
   setUserState: React.Dispatch<React.SetStateAction<UserType>>;
   saveData: () => void;
   setEditList: React.Dispatch<React.SetStateAction<boolean>>;
+  saveMemento: () => void;
   groupID: string;
   listID: string;
 }
 
 export default function EditList({
-  userState, setUserState, saveData, setEditList, listID, groupID
+  userState, setUserState, saveData, setEditList, listID, groupID, saveMemento
 }: props) {
   const closeWindow = (): void => {
     setEditList(false);
@@ -24,11 +26,17 @@ export default function EditList({
   }
 
   const handleSave = (): void => {
-    let newUserState = {...userState};
-
-    let oldData = newUserState.lists[listID];
+    let oldData = userState.lists[listID];
     let newData = {...oldData, ...inputState};
     
+    if (_.isEqual(oldData, newData)) {
+      closeWindow();
+      return;  
+    };
+
+    saveMemento();
+
+    let newUserState = {...userState};
     newUserState.lists[listID] = newData;
 
     setUserState({...newUserState});
@@ -37,6 +45,8 @@ export default function EditList({
   }
 
   const handleDelete = (): void => {
+    saveMemento();
+
     let newUserState = {...userState};
 
     const taskIDs = newUserState.lists[listID].taskIDs;
@@ -88,12 +98,12 @@ export default function EditList({
           <h3
             onClick={closeWindow}
           >Cancel</h3>
-          <h3
-            onClick={handleSave}
-          >Save</h3>
           <h3 className="Edit-main-buttons-delete"
             onClick={handleDelete}
           >Delete</h3>
+          <h3
+            onClick={handleSave}
+          >Save</h3>
         </div>
       </div>
     </div>

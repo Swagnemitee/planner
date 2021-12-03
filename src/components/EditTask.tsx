@@ -2,18 +2,20 @@ import { useState } from 'react';
 import { UserType } from '../types/types';
 
 import '../styles/Add&Edit.scss';
+import _ from 'lodash';
 
 type props = {
   userState: UserType;
   setUserState: React.Dispatch<React.SetStateAction<UserType>>;
   saveData: () => void;
   setEditTask: React.Dispatch<React.SetStateAction<boolean>>;
+  saveMemento: () => void;
   listID: string;
   taskID: string;
 }
 
 export default function AddGroup({
-  userState, setUserState, saveData, setEditTask, taskID, listID
+  userState, setUserState, saveData, setEditTask, taskID, listID, saveMemento
 }: props) {
   const closeWindow = (): void => {
     setEditTask(false);
@@ -24,11 +26,17 @@ export default function AddGroup({
   }
 
   const handleSave = (): void => {
-    let newUserState = {...userState};
-
-    let oldData = newUserState.tasks[taskID];
+    let oldData = userState.tasks[taskID];
     let newData = {...oldData, ...inputState};
     
+    if (_.isEqual(oldData, newData)) {
+      closeWindow();
+      return;  
+    };
+
+    saveMemento();
+
+    let newUserState = {...userState};
     newUserState.tasks[taskID] = newData;
 
     setUserState({...newUserState});
@@ -37,6 +45,8 @@ export default function AddGroup({
   }
 
   const handleDelete = (): void => {
+    saveMemento();
+    
     let newUserState = {...userState};
 
     let newList = newUserState.lists[listID];
@@ -87,12 +97,12 @@ export default function AddGroup({
           <h3
             onClick={closeWindow}
           >Cancel</h3>
-          <h3
-            onClick={handleSave}
-          >Save</h3>
           <h3 className="Edit-main-buttons-delete"
             onClick={handleDelete}
           >Delete</h3>
+          <h3
+            onClick={handleSave}
+          >Save</h3>
         </div>
       </div>
     </div>

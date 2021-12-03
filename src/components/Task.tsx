@@ -19,6 +19,7 @@ export default function Task({
 }: props) {
 
   const doTask = (id: string): void => {
+    // TODO: maybe add memento to doTask
     const newUserState = {...userState};
 
     const done = newUserState.tasks[id].done;

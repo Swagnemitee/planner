@@ -2,17 +2,19 @@ import { useState } from 'react';
 import { UserType } from '../types/types';
 
 import '../styles/Add&Edit.scss';
+import _ from 'lodash';
 
 type props = {
   userState: UserType;
   setUserState: React.Dispatch<React.SetStateAction<UserType>>;
   saveData: () => void;
   setEditGroup: React.Dispatch<React.SetStateAction<boolean>>;
+  saveMemento: () => void;
   groupID: string;
 }
 
 export default function EditGroup({
-  userState, setUserState, saveData, setEditGroup, groupID
+  userState, setUserState, saveData, setEditGroup, groupID, saveMemento
 }: props) {
   const closeWindow = (): void => {
     setEditGroup(false);
@@ -23,11 +25,17 @@ export default function EditGroup({
   }
 
   const handleSave = (): void => {
-    let newUserState = {...userState};
-
-    let oldData = newUserState.groups[groupID];
+    let oldData = userState.groups[groupID];
     let newData = {...oldData, ...inputState};
     
+    if (_.isEqual(oldData, newData)) {
+      closeWindow();
+      return;  
+    };
+
+    saveMemento();
+    
+    let newUserState = {...userState};
     newUserState.groups[groupID] = newData;
 
     setUserState({...newUserState});
@@ -36,6 +44,8 @@ export default function EditGroup({
   }
 
   const handleDelete = (): void => {
+    saveMemento();
+
     let newUserState = {...userState};
 
     const listIDs = newUserState.groups[groupID].listIDs;
@@ -77,12 +87,12 @@ export default function EditGroup({
           <h3
             onClick={closeWindow}
           >Cancel</h3>
-          <h3
-            onClick={handleSave}
-          >Save</h3>
           <h3 className="Edit-main-buttons-delete"
             onClick={handleDelete}
           >Delete</h3>
+          <h3
+            onClick={handleSave}
+          >Save</h3>
         </div>
       </div>
     </div>

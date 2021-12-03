@@ -8,7 +8,7 @@ import TaskField from "./TaskField";
 export default function App() {
   const saveData = (): void => {
     // TODO: save userState to localStorage
-    console.log(userState);
+    // console.log(userState);
   }
 
   const loadData = (): UserType => {
@@ -39,28 +39,18 @@ export default function App() {
 
   const saveMemento = (): void => {
     // TODO: save memento to sessionStorage
-    // TODO: add saveMemento to all functions
+    const newMementos = [...mementos];
+    newMementos.splice(mementoIndex);
+    newMementos.push(JSON.stringify(userState));
     const newMementoIndex = mementoIndex + 1;
-    const newMemento = [...mementos];
-    newMemento.push(stringifyData(userState));
 
-    setMementos([...newMemento]);
+    setMementos([...newMementos]);
     setMementoIndex(newMementoIndex);
-  }
-
-  const parseData = (data: string): UserType => {
-    // TODO: string to UserType
-    return {} as UserType;
-  }
-
-  const stringifyData = (data: UserType): string => {
-    // TODO: UserType to string
-    return "a";
   }
 
   const [userState, setUserState] = useState(loadData());
   const [mementos, setMementos] = useState([] as string[]);
-  const [mementoIndex, setMementoIndex] = useState(-1);
+  const [mementoIndex, setMementoIndex] = useState(0);
   
   return (
     <div className="App">
@@ -68,11 +58,17 @@ export default function App() {
         userState = {userState}
         setUserState = {setUserState}
         saveData = {saveData}
+        mementos = {mementos}
+        setMementos = {setMementos}
+        mementoIndex = {mementoIndex}
+        setMementoIndex = {setMementoIndex}
+        saveMemento={saveMemento}
       />
       <TaskField 
         userState = {userState}
         setUserState = {setUserState}
         saveData = {saveData}
+        saveMemento = {saveMemento}
       />
     </div>
   );

@@ -8,6 +8,7 @@ type props = {
   setUserState: React.Dispatch<React.SetStateAction<UserType>>;
   saveData: () => void;
   setAddGroup: React.Dispatch<React.SetStateAction<boolean>>;
+  saveMemento: () => void;
 }
 
 const defaultInputs = {
@@ -15,7 +16,7 @@ const defaultInputs = {
 }
 
 export default function AddGroup({
-  userState, setUserState, saveData, setAddGroup
+  userState, setUserState, saveData, setAddGroup, saveMemento
 }: props) {
   const closeWindow = (): void => {
     setAddGroup(false);
@@ -26,6 +27,8 @@ export default function AddGroup({
   }
 
   const handleCreate = (): void => {
+    saveMemento();
+    
     let newUserState = {...userState};
 
     let newID = (newUserState.nextID++).toString();

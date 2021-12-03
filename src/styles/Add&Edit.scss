@@ -71,6 +71,10 @@
       flex-direction: row;
       justify-content: space-evenly;
 
+      &-delete {
+        color: rgba(220, 20, 20);
+      }
+
       > * {
 
         &:hover {
