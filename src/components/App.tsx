@@ -20,26 +20,7 @@ export default function App() {
 
   const loadData = (): UserType => {
     const localUser = localStorage.getItem("user");
-    let user: UserType = localUser ? JSON.parse(localUser) : {
-      lastLogin: Date.now(),
-      nextID: 10,
-      groupIDs: ["1", "2", "3"], 
-      groups: {
-        "1": {id: "1", name: "Home", listIDs: ["4", "6"]},
-        "2": {id: "2", name: "Outside", listIDs: ["5"]},
-        "3": {id: "3", name: "Monkey", listIDs: []}
-      },
-      lists: {
-        "4": {id: "4", name: "Daily", reset: Reset.DAY, taskIDs: ["7", "8"]},
-        "5": {id: "5", name: "Weekly", reset: Reset.WEEK, taskIDs: []},
-        "6": {id: "6", name: "Hotel?", reset: Reset.NEVER, taskIDs: ["9"]}
-      },
-      tasks: {
-        "7": {id: "7", name: "Dishes", done: 0, count: 1},
-        "8": {id: "8", name: "Study", done: 5, count: 8},
-        "9": {id: "9", name: "Trivago.", done: 0, count: 3}
-      },
-    };
+    let user: UserType = localUser ? JSON.parse(localUser) : defaultUser;
 
     const now = Date.now() //1639151497000;
 
@@ -111,4 +92,47 @@ export default function App() {
       />
     </div>
   );
+}
+
+
+const defaultUser = {
+  lastLogin: Date.now(),
+  nextID: 31,
+  groupIDs: ["1", "2", "3"], 
+  groups: {
+    "1": {id: "1", name: "Personal", listIDs: ["4", "5", "6"]},
+    "2": {id: "2", name: "School", listIDs: ["7", "8"]},
+    "3": {id: "3", name: "Free Time", listIDs: ["9", "10", "30"]}
+  },
+  lists: {
+    "4": {id: "4", name: "Daily", reset: Reset.DAY, taskIDs: ["14", "15", "16"]},
+    "5": {id: "5", name: "Weekly", reset: Reset.WEEK, taskIDs: ["12", "22", "25"]},
+    "6": {id: "6", name: "Monthly", reset: Reset.MONTH, taskIDs: ["20", "23"]},
+    "7": {id: "7", name: "Daily", reset: Reset.DAY, taskIDs: ["11", "26"]},
+    "8": {id: "8", name: "Weekly", reset: Reset.WEEK, taskIDs: ["17", "24"]},
+    "9": {id: "9", name: "Daily", reset: Reset.DAY, taskIDs: ["13", "27"]},
+    "10": {id: "10", name: "Weekly", reset: Reset.WEEK, taskIDs: ["18", "19", "21", "29"]},
+    "30": {id: "30", name: "Long Time", reset: Reset.NEVER, taskIDs: ["28"]},
+  },
+  tasks: {
+    "11": {id: "11", name: "Study", done: 0, count: 1},
+    "12": {id: "12", name: "Excercise", done: 0, count: 5},
+    "13": {id: "13", name: "Have some personal time", done: 0, count: 2},
+    "14": {id: "14", name: "Tidy around", done: 0, count: 1},
+    "15": {id: "15", name: "Wake up early", done: 0, count: 1},
+    "16": {id: "16", name: "Go to bed early", done: 0, count: 1},
+    "17": {id: "17", name: "Work on projects", done: 0, count: 4},
+    "18": {id: "18", name: "Eat something delicious", done: 0, count: 1},
+    "19": {id: "19", name: "Do something exciting", done: 0, count: 1},
+    "20": {id: "20", name: "Reflect on my past month", done: 0, count: 1},
+    "21": {id: "21", name: "Try something new", done: 0, count: 1},
+    "22": {id: "22", name: "Clean thoroughly", done: 0, count: 1},
+    "23": {id: "23", name: "Develop a new habit", done: 0, count: 2},
+    "24": {id: "24", name: "Reflect on my past school week", done: 0, count: 1},
+    "25": {id: "25", name: "Plan my next week", done: 0, count: 1},
+    "26": {id: "26", name: "Do homework", done: 0, count: 1},
+    "27": {id: "27", name: "Find a new song I like", done: 0, count: 3},
+    "28": {id: "28", name: "Work on something big", done: 0, count: 100},
+    "29": {id: "29", name: "Thank Swagnemite for the website", done: 0, count: 1},
+  },
 }
