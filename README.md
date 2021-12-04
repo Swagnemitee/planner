@@ -1,16 +1,16 @@
 # Planner
 
-This is a web app that helps you plan and track your days. Keeping track of your tasks and visualizing them can increase your productivity and help you build habits. It has an intuitive and easy to use interface that you can costumize. \
+This is a web app that helps you **plan and track your days**. Keeping track of your tasks and visualizing them can increase your productivity and help you build habits. It has an **intuitive and easy** to use interface that you can costumize. \
 The web app is hosted at [planner.swagnemite.com](https://planner.swagnemite.com). It is designed for use on a large screen, it does not work on mobile.
 ##### I do not have access any kind of data. All data is stored on your device locally.
 
 ## Features
 
-- [x] - Create tasks and keep track of them as you complete
-- [x] - Insert tasks into lists that be can automatically reset every day, week or month
-- [x] - Organize lists into groups to keep your planner tidy and coherent
-- [x] - Drag and drop tasks, lists and groups to quickly edit your planner
-- [x] - Undo and redo every action to correct your mistakes
+- [x] - **Create tasks** and keep track of them as you complete
+- [x] - Insert tasks into lists that be can **automatically reset every day, week or month**
+- [x] - **Organize lists into groups** to keep your planner tidy and coherent
+- [x] - **Drag and drop** tasks, lists and groups to quickly edit your planner
+- [x] - **Undo and redo** every action to correct your mistakes
 
 ## How to Use
 
