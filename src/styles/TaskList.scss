@@ -17,6 +17,15 @@
     justify-content: space-between;
     height: 30px;
 
+    > h3 {
+
+      > span {
+        opacity: 0.4;
+        font-size: 0.8em;
+      }
+    }
+    
+
     > img {
       visibility: hidden;
       height: 70%;

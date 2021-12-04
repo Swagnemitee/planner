@@ -1,5 +1,6 @@
 import '../styles/TaskList.scss';
 import { TaskListType, UserType } from '../types/types';
+import { Reset } from '../types/enums';
 import Task from './Task';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 
@@ -30,8 +31,13 @@ export default function TaskList({
         >
           <div className="TaskList-title"
             {...provided.dragHandleProps}
-          >
-            <h3>{list.name}</h3>
+          > 
+            {
+              list.reset === Reset.NEVER ||
+              list.name.toLowerCase() === listReset[list.reset].toLowerCase() ? 
+              <h3>{list.name}</h3> :
+              <h3>{list.name}<span> • {listReset[list.reset]}</span></h3>
+            }
             <div className="divider"></div>
             <img src="icons/add.png" alt="Add"
               onClick={() =>{ setAddTask(true); setSelectedID(list.id)}}
@@ -72,4 +78,10 @@ export default function TaskList({
       }
     </Draggable>
   );
+}
+
+const listReset: {[key in "day" | "week" | "month"]: string} = {
+  "day": "daily",
+  "week": "weekly",
+  "month": "monthly"
 }
