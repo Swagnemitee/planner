@@ -7,6 +7,7 @@ type props = {
   userState: UserType;
   setUserState: React.Dispatch<React.SetStateAction<UserType>>;
   saveData: () => void;
+  saveMemento: () => void;
   setSelectedID: React.Dispatch<React.SetStateAction<string>>;
   setEditGroup: React.Dispatch<React.SetStateAction<boolean>>;
   setAddList: React.Dispatch<React.SetStateAction<boolean>>;
@@ -19,7 +20,7 @@ type props = {
 }
 
 export default function TaskGroup({
-  userState, setUserState, group, groupIndex, saveData, setAddList, setEditGroup, setSelectedID, setAddTask, setEditList, setEditTask, setSelectedParentID
+  userState, setUserState, group, groupIndex, saveData, setAddList, setEditGroup, setSelectedID, setAddTask, setEditList, setEditTask, setSelectedParentID, saveMemento
 }: props) {
   return (
     <Draggable draggableId={group.id} index={groupIndex}>
@@ -54,6 +55,7 @@ export default function TaskGroup({
                       userState={userState}
                       setUserState={setUserState}
                       saveData = {saveData}
+                      saveMemento = {saveMemento}
                       setSelectedID={setSelectedID}
                       setEditList={setEditList}
                       setAddTask={setAddTask}

@@ -6,6 +6,7 @@ type props = {
   userState: UserType;
   setUserState: React.Dispatch<React.SetStateAction<UserType>>;
   saveData: () => void;
+  saveMemento: () => void;
   setSelectedID: React.Dispatch<React.SetStateAction<string>>;
   setEditTask: React.Dispatch<React.SetStateAction<boolean>>;
   setSelectedParentID: React.Dispatch<React.SetStateAction<string>>;
@@ -15,11 +16,12 @@ type props = {
 }
 
 export default function Task({
-  userState, setUserState, task, index, saveData, setEditTask, setSelectedID, parentID, setSelectedParentID
+  userState, setUserState, task, index, saveData, setEditTask, setSelectedID, parentID, setSelectedParentID, saveMemento
 }: props) {
 
   const doTask = (id: string): void => {
-    // TODO: maybe add memento to doTask
+    saveMemento();
+
     const newUserState = {...userState};
 
     const done = newUserState.tasks[id].done;

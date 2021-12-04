@@ -7,6 +7,7 @@ type props = {
   userState: UserType;
   setUserState: React.Dispatch<React.SetStateAction<UserType>>;
   saveData: () => void;
+  saveMemento: () => void;
   setSelectedID: React.Dispatch<React.SetStateAction<string>>;
   setEditList: React.Dispatch<React.SetStateAction<boolean>>;
   setAddTask: React.Dispatch<React.SetStateAction<boolean>>;
@@ -18,7 +19,7 @@ type props = {
 }
 
 export default function TaskList({
-  userState, setUserState, list, listIndex, saveData, setAddTask, setEditList, setSelectedID, setEditTask, parentID, setSelectedParentID
+  userState, setUserState, list, listIndex, saveData, setAddTask, setEditList, setSelectedID, setEditTask, parentID, setSelectedParentID, saveMemento
 }: props) {
   return (
     <Draggable draggableId={list.id} index={listIndex}>
@@ -53,6 +54,7 @@ export default function TaskList({
                       userState={userState}
                       setUserState={setUserState}
                       saveData = {saveData}
+                      saveMemento = {saveMemento}
                       setSelectedID={setSelectedID}
                       setEditTask={setEditTask}
                       setSelectedParentID={setSelectedParentID}
