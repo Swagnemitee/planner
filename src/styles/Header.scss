@@ -3,12 +3,24 @@
 Header {
   position: absolute;
   display: flex;
-  justify-content: flex-end;
   width: 100%;
   left: 0;
   background-color: $header_color;
+  padding-right: 2em;
+  padding-left: 2em;
 
-  > img {
+  &.second {
+    pointer-events: none;
+    background-color: transparent;
+    justify-content: center;
+
+    * {
+      pointer-events: auto;
+    }
+  }
+
+  img {
+    display: block;
     -webkit-user-drag: none;
     -khtml-user-drag: none;
     -moz-user-drag: none;

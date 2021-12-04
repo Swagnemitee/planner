@@ -56,15 +56,21 @@ export default function Header({
   return (
     <>
       <header>
-      <img src="icons/undo.png" alt="Undo" className={undoDisabled() ? "disabled" : ""}
+        <img src="icons/undo.png" alt="Undo" className={undoDisabled() ? "disabled" : ""}
           onClick={undo}
         />
         <img src="icons/redo.png" alt="Redo" className={redoDisabled() ? "disabled" : ""}
           onClick={redo}
         />
+        <div className="divider"></div>
         <img src="icons/add.png" alt="Add"
           onClick={() => setAddGroup(true)}
         />
+      </header>
+      <header className="second">
+        <a href="https://github.com/Swagnemitee/Planner#how-to-use" target="_blank" rel="noopener noreferrer">
+          <img src="icons/help.png" alt="Help"></img>
+        </a>
       </header>
       {
         addGroup &&
