@@ -22,7 +22,7 @@ export default function App() {
     const localUser = localStorage.getItem("user");
     let user: UserType = localUser ? JSON.parse(localUser) : defaultUser;
 
-    const now = Date.now() //1639151497000;
+    const now = Date.now();
 
     const d1 = dayjs(user.lastLogin);
     const d2 = dayjs(now);
@@ -30,10 +30,6 @@ export default function App() {
     const sameMonth = d1.isSame(d2, "month");
     const sameWeek = d1.isSame(d2, "week");
     const sameDay = d1.isSame(d2, "day");
-
-    console.log(d1, d2)
-    console.log(sameDay, sameWeek, sameMonth);
-    console.log(d1.locale())
 
     for (const listID in user.lists) {
       const list = user.lists[listID];
