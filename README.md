@@ -33,6 +33,14 @@ If I continue working on this, there are a few features I want to implement:
 - [ ] - Keep track of the amount of points received on a daily, weekly and monthly basis
 - [ ] - Users can check their past points and compare to their current progress
 
+## Significance
+
+This is my third webapp. I built this webapp because I wanted to have a planner that I can use daily. I searched many planners but I couldn't find one with the features that I wanted. That's why I wanted to create a simple webapp with a simple and intuitive UI and the features that I want. I use this planner daily in order to build habits and organize and plan my days. For this project I again decided to use React because I wanted to become more efficient at working with it.
+
+I also used many libraries in order to simplify my work. I learned how to navigate and learn completely new libraries and products. Such as dayjs to work with dates and lodash to work with objects and arrays. I feel like being able to understand new products by reading the documentation is an important skill.
+
+I wanted to also learn how to implement TypeScript into this project. I was already familiar with types thanks to Java and Having typed variables was really useful. Not only can I identify type related bugs before testing, but I also get better support for my IDE. Visual Studio Code has lots of useful tools that make developing with TypeScript easier and faster. I don't think I will ever use JS without TS again. 
+
 ## Technologies Used
 
 * [React](https://www.npmjs.com/package/react) to build the website
