@@ -1,7 +1,10 @@
 # Planner
 
-This is a web app that helps you **plan and track your days**. Keeping track of your tasks and visualizing them can increase your productivity and help you build habits. It has an **intuitive and easy** to use interface that you can costumize. \
-The web app is hosted at [planner.ozansap.com](https://planner.ozansap.com). It is designed for use on a large screen, it does not work on mobile.
+This is a web app that helps you **plan and track your days**. Keeping track of your tasks and visualizing them can increase your productivity and help you build habits. It has an **intuitive and easy** to use interface that you can costumize.
+
+The web app is hosted at [planner.ozansap.com](https://planner.ozansap.com). \
+It is designed for use on a large screen, it does not work on mobile.
+
 ##### I do not have access any kind of data. All data is stored on your device locally.
 
 ## Features
